@@ -10,7 +10,7 @@ import {
   validateRestaurantId,
   validateNewRestaurantData,
   validateUpdateRestaurantData,
-} from '../validator';
+} from '../middleware/validators';
 
 const router = express.Router();
 
