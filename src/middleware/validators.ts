@@ -52,7 +52,7 @@ export const validateUpdateRestaurantData = [
     .withMessage('Rating must be in the format X.X'),
   check('priceRange')
     .optional()
-    .isIn(['$', '$$', '$$$'])
+    .isIn(['$', '$$, $$$'])
     .withMessage('Price Range must be one of $, $$, $$$'),
   check('specialty')
     .optional()
