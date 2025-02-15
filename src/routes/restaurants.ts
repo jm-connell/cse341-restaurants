@@ -6,13 +6,23 @@ import {
   deleteRestaurant,
   updateRestaurant,
 } from '../controllers/restaurants';
+import {
+  validateRestaurantId,
+  validateNewRestaurantData,
+  validateUpdateRestaurantData,
+} from '../validator';
 
 const router = express.Router();
 
 router.get('/', getRestaurants);
-router.get('/:id', getRestaurantById);
-router.post('/add', addRestaurant);
-router.delete('/:id', deleteRestaurant);
-router.put('/:id', updateRestaurant);
+router.get('/:id', validateRestaurantId, getRestaurantById);
+router.post('/add', validateNewRestaurantData, addRestaurant);
+router.delete('/:id', validateRestaurantId, deleteRestaurant);
+router.put(
+  '/:id',
+  validateRestaurantId,
+  validateUpdateRestaurantData,
+  updateRestaurant
+);
 
 export default router;
