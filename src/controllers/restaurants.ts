@@ -13,6 +13,23 @@ export async function getRestaurants(
   }
 }
 
+export async function getRestaurantById(
+  req: Request,
+  res: Response
+): Promise<void> {
+  try {
+    const { id } = req.params;
+    const restaurant = await Restaurant.findById(id);
+    if (!restaurant) {
+      res.status(404).json({ error: 'Restaurant not found' });
+      return;
+    }
+    res.status(200).json(restaurant);
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message });
+  }
+}
+
 export async function addRestaurant(
   req: Request,
   res: Response
@@ -21,6 +38,23 @@ export async function addRestaurant(
     const newRestaurant = new Restaurant(req.body);
     const addResponse = await newRestaurant.save();
     res.status(201).json(addResponse);
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message });
+  }
+}
+
+export async function deleteRestaurant(
+  req: Request,
+  res: Response
+): Promise<void> {
+  try {
+    const { id } = req.params;
+    const deleteResponse = await Restaurant.findByIdAndDelete(id);
+    if (!deleteResponse) {
+      res.status(404).json({ error: 'Restaurant not found' });
+      return;
+    }
+    res.status(200).json(deleteResponse);
   } catch (err) {
     res.status(500).json({ error: (err as Error).message });
   }
