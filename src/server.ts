@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import routes from './routes';
 import restaurantRoutes from './routes/restaurants';
 import dotenv from 'dotenv';
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('../swagger-output.json');
 
 dotenv.config();
 
@@ -23,6 +25,7 @@ mongoose
 
 app.use('/', routes);
 app.use('/restaurants', restaurantRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
