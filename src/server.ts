@@ -24,11 +24,14 @@ mongoose
     console.error('Failed to connect to MongoDB', err);
   });
 
-app.use('/', routes);
-app.use('/restaurants', restaurantRoutes);
+// Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-// Use the error handling middleware
+// Define routes
+app.use('/', routes);
+app.use('/restaurants', restaurantRoutes);
+
+// Error handling middleware
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;

@@ -23,8 +23,9 @@ export async function getRestaurantById(
     const { id } = req.params;
     const restaurant = await Restaurant.findById(id);
     if (!restaurant) {
-      res.status(404).json({ error: 'Restaurant not found' });
-      return;
+      const error = new Error('Restaurant not found');
+      (error as any).status = 404;
+      return next(error);
     }
     res.status(200).json(restaurant);
   } catch (err) {
@@ -55,8 +56,9 @@ export async function deleteRestaurant(
     const { id } = req.params;
     const deleteResponse = await Restaurant.findByIdAndDelete(id);
     if (!deleteResponse) {
-      res.status(404).json({ error: 'Restaurant not found' });
-      return;
+      const error = new Error('Restaurant not found');
+      res.status(404);
+      throw error;
     }
     res.status(200).json(deleteResponse);
   } catch (err) {
