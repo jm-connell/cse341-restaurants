@@ -59,3 +59,25 @@ export async function deleteRestaurant(
     res.status(500).json({ error: (err as Error).message });
   }
 }
+
+export async function updateRestaurant(
+  req: Request,
+  res: Response
+): Promise<void> {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+    const updatedRestaurant = await Restaurant.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    );
+    if (!updatedRestaurant) {
+      res.status(404).json({ error: 'Restaurant not found' });
+      return;
+    }
+    res.status(200).json(updatedRestaurant);
+  } catch (err) {
+    res.status(500).json({ error: (err as Error).message });
+  }
+}
