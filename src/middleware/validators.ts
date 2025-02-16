@@ -21,9 +21,7 @@ export const validateNewRestaurantData = [
   check('phone')
     .matches(/^\d{3}-\d{3}-\d{4}$/)
     .withMessage('Phone must be in the format 123-456-7890'),
-  check('rating')
-    .matches(/^\d\.\d$/)
-    .withMessage('Rating must be in the format X.X'),
+  check('rating').notEmpty().withMessage('Rating is required'),
   check('priceRange')
     .isIn(['$', '$$', '$$$'])
     .withMessage('Price Range must be one of $, $$, $$$'),
