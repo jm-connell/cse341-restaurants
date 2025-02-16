@@ -1,0 +1,63 @@
+### GET All Restaurants - Localhost
+GET http://localhost:3333/restaurants/
+
+### GET Restaurant by ID - Localhost
+GET http://localhost:3333/restaurants/67afcbbe8e0f8420006da9f0
+
+### POST Add New Restaurant - Localhost
+POST http://localhost:3333/restaurants/add
+Content-Type: application/json
+
+{
+  "name": "New Restaurant",
+  "cuisine": "Italian",
+  "address": "123 Test St, Rexburg, ID 83440",
+  "phone": "208-555-1234",
+  "rating": 4.0,
+  "priceRange": "$",
+  "specialty": "Margherita Pizza"
+}
+
+### DELETE Restaurant by ID - Localhost
+DELETE http://localhost:3333/restaurants/67afcbbe8e0f8420006da9f0
+
+### PUT Update Restaurant by ID - Localhost
+PUT http://localhost:3333/restaurants/67afcbbe8e0f8420006da9f0
+Content-Type: application/json
+
+{
+  "name": "Updated Grill",
+  "cuisine": "Hawaiian Fusion"
+}
+
+### GET All Restaurants - Production
+GET https://cse341-restaurants.onrender.com/restaurants/
+
+### GET Restaurant by ID - Production
+GET https://cse341-restaurants.onrender.com/restaurants/67afcbbe8e0f8420006da9f0
+
+### POST Add New Restaurant - Production
+POST https://cse341-restaurants.onrender.com/restaurants/add
+Content-Type: application/json
+
+{
+  "name": "New Restaurant",
+  "cuisine": "Italian",
+  "address": "123 Test St, Rexburg, ID 83440",
+  "phone": "208-555-1234",
+  "rating": 4.0,
+  "priceRange": "$",
+  "specialty": "Margherita Pizza"
+}
+
+### DELETE Restaurant by ID - Production
+DELETE https://cse341-restaurants.onrender.com/restaurants/67afcbbe8e0f8420006da9f0
+
+### PUT Update Restaurant by ID - Production
+PUT https://cse341-restaurants.onrender.com/restaurants/67afcbbe8e0f8420006da9f0
+Content-Type: application/json
+
+{
+  "name": "Updated Restaurant",
+  "specialty": "Orange Chicken"
+}
