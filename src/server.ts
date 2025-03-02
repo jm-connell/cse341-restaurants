@@ -1,7 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import session from 'express-session';
 import routes from './routes';
 import restaurantRoutes from './routes/restaurants';
+import authRoutes from './routes/authRoutes';
 import dotenv from 'dotenv';
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('../swagger-output.json');
@@ -24,12 +26,26 @@ mongoose
     console.error('Failed to connect to MongoDB', err);
   });
 
+// Session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'your-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    },
+  })
+);
+
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Define routes
 app.use('/', routes);
 app.use('/restaurants', restaurantRoutes);
+app.use('/auth', authRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
