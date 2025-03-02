@@ -14,4 +14,13 @@ router.get('/success', (req, res) => {
   res.send('Login successful');
 });
 
+// Add this route to check if the user is authenticated
+router.get('/check-auth', (req, res) => {
+  if (req.session.user) {
+    res.json({ authenticated: true, user: req.session.user });
+  } else {
+    res.json({ authenticated: false });
+  }
+});
+
 export default router;

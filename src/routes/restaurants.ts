@@ -11,15 +11,19 @@ import {
   validateNewRestaurantData,
   validateUpdateRestaurantData,
 } from '../middleware/validators';
+import { isAuthenticated } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
 router.get('/', getRestaurants);
 router.get('/:id', validateRestaurantId, getRestaurantById);
-router.post('/add', validateNewRestaurantData, addRestaurant);
-router.delete('/:id', validateRestaurantId, deleteRestaurant);
+
+/* Protected Routes */
+router.post('/add', isAuthenticated, validateNewRestaurantData, addRestaurant);
+router.delete('/:id', isAuthenticated, validateRestaurantId, deleteRestaurant);
 router.put(
   '/:id',
+  isAuthenticated,
   validateRestaurantId,
   validateUpdateRestaurantData,
   updateRestaurant
