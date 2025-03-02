@@ -1,7 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import session from 'express-session';
 import routes from './routes';
 import restaurantRoutes from './routes/restaurants';
+import authRoutes from './routes/authRoutes';
 import dotenv from 'dotenv';
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('../swagger-output.json');
@@ -44,6 +46,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 // Define routes
 app.use('/', routes);
 app.use('/restaurants', restaurantRoutes);
+app.use('/auth', authRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
