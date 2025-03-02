@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import session from 'express-session';
 import routes from './routes';
 import restaurantRoutes from './routes/restaurants';
 import authRoutes from './routes/authRoutes';
@@ -24,6 +25,16 @@ mongoose
   .catch((err) => {
     console.error('Failed to connect to MongoDB', err);
   });
+
+// Session middleware
+app.use(
+  session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));

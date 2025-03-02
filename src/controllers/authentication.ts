@@ -51,10 +51,10 @@ export const githubAuthCallback = async (req: Request, res: Response) => {
     });
 
     req.session.user = userResponse.data;
-    res.redirect('/');
+    res.redirect('/auth/success');
   } catch (error) {
     console.error('Error during GitHub OAuth callback:', error);
-    res.redirect('/login');
+    res.redirect('/auth/github');
   }
 };
 
